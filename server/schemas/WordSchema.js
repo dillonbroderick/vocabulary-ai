@@ -30,6 +30,10 @@ const wordSchema = new Schema({
             type: Number,
             required: true
         }
+    },
+    is_word_of_day: {
+        type: Boolean,
+        required: true
     }
 })
 
