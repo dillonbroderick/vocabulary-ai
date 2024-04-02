@@ -1,22 +1,32 @@
 const Word = require('../schemas/WordSchema')
 const mongoose = require('mongoose')
 
-const updateWordOfDay = async (req, res) => {
+const promoteWordOfDay = async (req, res) => {
     try {
-        prev_word_of_day = await Word.findOneAndUpdate(
-                { "is_word_of_day": true },
-                { "$set": { "is_word_of_day": false } }
-            );
-
+        new_word = req.body.word;
         new_word_of_day = await Word.findOneAndUpdate(
-                { "_id": new_word._id },
-                { "$set": { "is_word_of_day": true } }
+                { "word": new_word },
+                { "$set": { "is_word_of_day": true } },
+                { "new": true }
             );
-            
         res.status(200).json(new_word_of_day);
     } catch (error) {
         console.log(error);
-        res.status(500).send("Could not update word of the day");
+        res.status(500).send("Could not promote word of the day");
+    }
+}
+
+const demoteWordOfDay = async (req, res) => {
+    try {
+        prev_word_of_day = await Word.findOneAndUpdate(
+                { "is_word_of_day": true },
+                { "$set": { "is_word_of_day": false } },
+                { "new": true }
+            );
+        res.status(200).json(new_word_of_day);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("Could not demote word of the day");
     }
 }
 
@@ -46,17 +56,7 @@ const getAllWords = async (req, res) => {
 
 const createNewWord = async (req, res) => {
     try {
-        const word = await Word.create({
-            "word": "test",
-            "part_of_speech": "noun",
-            "definition": "this is a test",
-            "date": {
-                "year": 2025,
-                "month": 2,
-                "day": 24
-            },
-            "is_word_of_day": false
-        })
+        const word = await Word.create(req.body)
         res.status(200).json(word);
     } catch (error) {
         console.log(error);
@@ -65,7 +65,8 @@ const createNewWord = async (req, res) => {
 }
 
 module.exports = {
-    updateWordOfDay,
+    promoteWordOfDay,
+    demoteWordOfDay,
     getWordOfDay,
     getAllWords,
     createNewWord
