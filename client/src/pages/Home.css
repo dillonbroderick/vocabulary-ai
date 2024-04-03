@@ -1,6 +1,16 @@
-.typed-out-title {
+.container {
     margin-left: 30%;
     margin-top: 20%;
+}
+
+.c1 {
+    display: inline-block;
+}
+.c2 {
+    display: inline-block;
+}
+
+.type-title {
     overflow: hidden;
     border-right: .10em solid black;
     white-space: nowrap;
@@ -9,22 +19,23 @@
     font-weight: 400;
     font-style: normal;
     width: 0;
-    max-width: 250px;
-    animation: 
-        typing 1.2s steps(17, end) forwards,
-        blink 2s 5;
+    animation:
+        typing 1.5s steps(30, end) forwards;
 }
 
-.typed-out-word {
-    margin-left: 30%;
+.type-word {
     overflow: hidden;
-    border-right: .10em solid black;
+    border-right: .10em solid transparent;
     white-space: nowrap;
     font-size: 1.6rem;
     font-family: "Courier Prime", monospace;
     font-weight: 400;
     font-style: normal;
-    width: auto;
+    width: 0;
+    animation:
+        typing 1.5s steps(30, end) forwards,
+        blink 0.75s infinite;
+    animation-delay: 1.6s;
 }
 
 @keyframes typing {
@@ -32,15 +43,15 @@
         width: 0;
     }
     to {
-        width: 250px;
+        width: 100%;
     }
 }
 
 @keyframes blink {
     from {
-        border-color: transparent
+        border-color: black
     }
     to {
-        border-color: black;
+        border-color: transparent;
     }
 }

@@ -4,7 +4,6 @@ import axios from 'axios';
 
 function Home() {
     const [wordOfDay, setWordOfDay] = useState(null);
-    const [animationFinished, setAnimationFinished] = useState(false);
 
     useEffect(() => {
         axios.defaults.baseURL = 'http://localhost:4000';
@@ -18,18 +17,25 @@ function Home() {
             })
     }, []);
 
-    const handleAnimationEnd = () => {
-        setAnimationFinished(true);
-    };
+            //<div class="typed-out-title" onAnimationEnd={handleAnimationEnd}>today's word is:</div>
 
     return (
         <>
-            <div class="typed-out-title" onAnimationEnd={handleAnimationEnd}>today's word is:</div>
-            { animationFinished && (
-                <div class="typed-out-word">
-                    { wordOfDay ? wordOfDay.word : "NO WORD OF DAY TODAY" }
+
+            <div class="container">
+                <div class="c1">
+                    <div class="type-title">
+                        today's word is:
+                    </div>
                 </div>
-            )}
+                <br></br>
+                <div class="c2">
+                    <div class="type-word">
+                        { wordOfDay ? wordOfDay.word : "NO WORD OF DAY TODAY" }
+                    </div>
+                </div>
+            </div>
+
         </>
     );
 }
