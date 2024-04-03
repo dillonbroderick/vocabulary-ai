@@ -34,8 +34,18 @@ const getWordOfDay = async (req, res) => {
     try {
         const wordOfDay = await Word.findOne({ "is_word_of_day": true });
         if (!wordOfDay) {
-            console.log("Word of the day does not exist");
-            return res.status(500).send("Word of the day does not exist");
+            console.log("Word of the day does not exist, using default");
+            return res.status(200).json({
+                "word": "qualia",
+                "part_of_speech": "noun",
+                "definition": "instances of subjective, conscious experience",
+                "date": {
+                    "year": 2024,
+                    "month": 4,
+                    "day": 2
+                },
+                "is_word_of_day": false
+            });
         }
         res.status(200).json(wordOfDay);
     } catch (error) {
