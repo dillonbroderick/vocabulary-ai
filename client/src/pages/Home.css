@@ -9,6 +9,9 @@
 .c2 {
     display: inline-block;
 }
+.c3 {
+    display: inline-block;
+}
 
 .type-title {
     overflow: hidden;
@@ -29,13 +32,39 @@
     white-space: nowrap;
     font-size: 1.6rem;
     font-family: "Courier Prime", monospace;
-    font-weight: 400;
+    font-weight: 600;
     font-style: normal;
     width: 0;
     animation:
         typing 1.5s steps(30, end) forwards,
         blink 0.75s infinite;
     animation-delay: 1.6s;
+}
+
+.fade-in {
+    overflow: hidden;
+    color: black;
+    white-space: nowrap;
+    font-size: 1.6rem;
+    font-family: "Courier Prime", monospace;
+    font-weight: 400;
+    font-style: normal;
+    animation:
+        fadeIn 6s;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    54% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 @keyframes typing {

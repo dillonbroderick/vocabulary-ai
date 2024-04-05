@@ -30,9 +30,12 @@ function Home() {
                 </div>
                 <br></br>
                 <div class="c2">
-                    <div class="type-word">
-                        { wordOfDay ? wordOfDay.word : "NO WORD OF DAY TODAY" }
-                    </div>
+                    <p class="type-word">
+                        { wordOfDay ? wordOfDay.word : "abhorrent" }
+                    </p>
+                </div>
+                <div class="fade-in">
+                        { wordOfDay ? wordOfDay.part_of_speech + ": " + wordOfDay.definition : ""}
                 </div>
             </div>
 
