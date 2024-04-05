@@ -13,10 +13,14 @@ def generate_word_of_day(new_word):
     day = int(now.strftime("%d"))
 
     prev_word_doc = requests.patch("http://localhost:4000/api/words/demote-word-of-day")
+    new_word_json = requests.get("https://api.dictionaryapi.dev/api/v2/entries/en/" + new_word).json()[0]
+    part_of_speech = new_word_json["meanings"][0]["partOfSpeech"]
+    definition = new_word_json["meanings"][0]["definitions"][0]["definition"]
+
     new_word_doc = requests.post("http://localhost:4000/api/words/create-new-word", json={
         "word": new_word,
-        "part_of_speech": "noun",
-        "definition": "test",
+        "part_of_speech": part_of_speech,
+        "definition": definition,
         "date": {
             "year": year,
             "month": month,
