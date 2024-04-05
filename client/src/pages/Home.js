@@ -17,7 +17,6 @@ function Home() {
             })
     }, []);
 
-            //<div class="typed-out-title" onAnimationEnd={handleAnimationEnd}>today's word is:</div>
 
     return (
         <>

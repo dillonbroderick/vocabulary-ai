@@ -1,6 +1,6 @@
 .container {
-    margin-left: 30%;
-    margin-top: 20%;
+    margin-left: 20%;
+    margin-top: 16%;
 }
 
 .c1 {
@@ -42,12 +42,18 @@
 }
 
 .fade-in {
-    overflow: hidden;
+    margin-right: 10%;
     color: black;
     white-space: nowrap;
+
+    overflow: visible;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+
     font-size: 1.6rem;
     font-family: "Courier Prime", monospace;
-    font-weight: 400;
+    font-weight: 300;
     font-style: normal;
     animation:
         fadeIn 6s;
