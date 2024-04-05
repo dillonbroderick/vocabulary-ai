@@ -1,7 +1,10 @@
 import requests
 import time
+import os
 from bs4 import BeautifulSoup
 from datetime import date
+from openai import OpenAI
+from dotenv import load_dotenv
 
 def generate_word_of_day(new_word):
     now = date.today()
@@ -26,6 +29,8 @@ def generate_word_of_day(new_word):
 
 
 prev_word = "none"
+load_dotenv()
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 while 1:
 
