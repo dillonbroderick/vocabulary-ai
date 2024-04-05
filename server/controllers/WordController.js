@@ -23,7 +23,7 @@ const demoteWordOfDay = async (req, res) => {
                 { "$set": { "is_word_of_day": false } },
                 { "new": true }
             );
-        res.status(200).json(new_word_of_day);
+        res.status(200).json(prev_word_of_day);
     } catch (error) {
         console.log(error);
         res.status(500).send("Could not demote word of the day");
