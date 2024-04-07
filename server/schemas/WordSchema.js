@@ -34,6 +34,14 @@ const wordSchema = new Schema({
     is_word_of_day: {
         type: Boolean,
         required: true
+    },
+    joke: {
+        type: String,
+        required: true
+    },
+    poem: {
+        type: String,
+        required: true
     }
 })
 

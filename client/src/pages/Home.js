@@ -20,7 +20,6 @@ function Home() {
 
     return (
         <>
-
             <div class="container">
                 <div class="c1">
                     <div class="type-title">
@@ -37,7 +36,6 @@ function Home() {
                         { wordOfDay ? wordOfDay.part_of_speech + ": " + wordOfDay.definition : ""}
                 </div>
             </div>
-
         </>
     );
 }

@@ -17,6 +17,26 @@ def generate_word_of_day(new_word):
     part_of_speech = new_word_json["meanings"][0]["partOfSpeech"]
     definition = new_word_json["meanings"][0]["definitions"][0]["definition"]
 
+    joke_query = "Write a short joke that uses and involves the word '" + new_word + "'. This joke should help the user remember the word '" + new_word + "' and its meaning, but it shouldn't necessarily just give the definition of the word in the joke. The part of speech being used is '" + part_of_speech + "', and the definition being used is '" + definition + "'."
+    joke_completion = client.chat.completions.create(
+        model = "gpt-3.5-turbo",
+        messages = [
+            {"role": "system", "content": "You are a witty and clever assistant who is an expert on words and wordplay. Your users are trying to learn new vocabulary words, and to help them with this, you must come up with jokes, poems, and other contextualizing content for each of these words."},
+            {"role": "user", "content": joke_query}
+        ]
+    )
+    joke = joke_completion.choices[0].message.content
+
+    poem_query = "Write a short poem, only a few lines, that uses and involves the word '" + new_word + "'. This poem should help the user remember the word '" + new_word + "' and its meaning. Consider different styles of poetry and decide on which style will most effectively use the word. Styles to consider are Shakespeare, Dr. Seuss, Edgar Allen Poe, Emily Dickinson; this list is not exhaustive. The part of speech being used is '" + part_of_speech + "', and the definition being used is '" + definition + "'."
+    poem_completion = client.chat.completions.create(
+        model = "gpt-3.5-turbo",
+        messages = [
+            {"role": "system", "content": "You are a witty and clever assistant who is an expert on words and wordplay. Your users are trying to learn new vocabulary words, and to help them with this, you must come up with jokes, poems, and other contextualizing content for each of these words."},
+            {"role": "user", "content": poem_query}
+        ]
+    )
+    poem = poem_completion.choices[0].message.content
+
     new_word_doc = requests.post("http://localhost:4000/api/words/create-new-word", json={
         "word": new_word,
         "part_of_speech": part_of_speech,
@@ -26,7 +46,9 @@ def generate_word_of_day(new_word):
             "month": month,
             "day": day
         },
-        "is_word_of_day": True
+        "is_word_of_day": True,
+        "joke": joke,
+        "poem": poem
     })
 
     prev_word = new_word
@@ -35,6 +57,7 @@ def generate_word_of_day(new_word):
 prev_word = "none"
 load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+client = OpenAI(api_key=OPENAI_API_KEY)
 
 while 1:
 
