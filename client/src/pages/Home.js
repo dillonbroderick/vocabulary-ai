@@ -34,6 +34,10 @@ function Home() {
                 </div>
                 <div class="fade-in">
                         { wordOfDay ? wordOfDay.part_of_speech + ": " + wordOfDay.definition : ""}
+                        <br></br>
+                        { wordOfDay ? "joke: " + wordOfDay.joke : "joke: "}
+                        <br></br>
+                        { wordOfDay ? "poem: " + wordOfDay.poem : "poem: "}
                 </div>
             </div>
         </>
