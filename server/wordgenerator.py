@@ -12,6 +12,11 @@ def generate_word_of_day(new_word):
     month = int(now.strftime("%m"))
     day = int(now.strftime("%d"))
 
+    curr_word_of_day = requests.get("http://localhost:4000/api/words/get-word-of-day").json()
+    if curr_word_of_day["word"] == new_word:
+        print("Word of day has not changed")
+        return
+
     prev_word_doc = requests.patch("http://localhost:4000/api/words/demote-word-of-day")
     new_word_json = requests.get("https://api.dictionaryapi.dev/api/v2/entries/en/" + new_word).json()[0]
     part_of_speech = new_word_json["meanings"][0]["partOfSpeech"]

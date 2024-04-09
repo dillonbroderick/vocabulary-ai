@@ -66,6 +66,11 @@ const getAllWords = async (req, res) => {
 
 const createNewWord = async (req, res) => {
     try {
+        const prevWord = await Word.findOne({ "word" : req.body.word });
+        if (prevWord) {
+            return res.status(400).send("Word already exists in database")
+        }
+
         const word = await Word.create(req.body)
         res.status(200).json(word);
     } catch (error) {
